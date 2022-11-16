@@ -1,0 +1,11 @@
+---
+- name: Removing multiple packages
+  hosts: all
+  become: true
+  gather_facts: yes
+
+  tasks:
+    - name: removing packages
+      yum:
+        name: [ 'wget', 'tree', 'telnet']
+        state: absent

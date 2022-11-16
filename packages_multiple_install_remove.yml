@@ -1,0 +1,19 @@
+---
+- name: install multiple packages and removing multiple packages
+  hosts: all
+  become: true
+  gather_facts: yes
+
+  tasks:
+    - name: installing packages
+      yum:
+        name: "{{ item.package }}"
+        state: "{{ item.setup }}"
+      loop:
+        - { package : 'git', setup: 'installed'}
+        - { package : 'make', setup: 'latest'}
+        - { package : 'wget', setup: 'absent'} 
+        - { package : 'tree', setup: 'removed'}
+        - { package : 'gzip', setup: 'installed'}
+        - { package : 'telnet', setup: 'absent'}
+
